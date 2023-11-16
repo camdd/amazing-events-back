@@ -8,8 +8,11 @@ eventRouter.post( "/", eventController.createEvent )
 
 eventRouter.put( "/:id", eventController.updateEvent ) 
 
-eventRouter.delete( "/", eventController.deleteEvent )
+eventRouter.delete( "/:id", eventController.deleteEvent )
 
 eventRouter.get( "/:id", eventController.getOneEvent )
+
+eventRouter.post("/", eventController.createEvents);
+
 
 module.exports = eventRouter
