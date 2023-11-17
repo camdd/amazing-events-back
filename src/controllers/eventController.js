@@ -1,10 +1,16 @@
-const Event = require( '../models/Event' )
+/* const Event = require( '../models/Event' ) */
+const eventService = require("../services/eventService")
 
 const eventController = {
-    async getEvent(req, res){
+    async getEvents(req, res){
         try{
-            const events = await Event.find()
-            res.status(200).json( { success:true, events: events } )
+            const eventFounded = eventService.getEvents()
+            if (eventFounded>0) {
+                res.status(200).json(eventFounded)
+            } else {
+                res.send("events not found")
+            }
+            
         }catch(err){
             res.status(500).json( { success:false, message: "Internal server error" } )
         }
@@ -21,8 +27,16 @@ const eventController = {
 
     async createEvent(req, res){
         try{
-            const newEvent = await Event.create( req.body )
-            res.status(201).json( { success:true, event: newEvent } )
+            const payload = req.body
+            const eventCreated = eventService.createEvent(payload)
+
+            if (eventCreated) {
+                res.status(201).json({message: "Event created"})
+            } else {
+                res.send("Error creating event")
+            }
+
+
         }catch(err){
             console.log( err )
             res.status(500).json( { success:false, message: "Internal server error" } )
@@ -31,11 +45,13 @@ const eventController = {
 
     async createEvents(req, res) {
         try{
+            console.log(req.body.events)
             const newEvents = await Event.insertMany( req.body.events )
+
             res.status(201).json({ success: true, message: "Eventos creados", events: newEvents });
         }catch(err){
             console.log( err )
-            res.status(500).json( { success:false, message: "Internal server error" } )
+            res.status(500).json( { success:false, message: "Internal server error: " + err.message } )
         }
     },
 
@@ -53,6 +69,16 @@ const eventController = {
             res.status( 200 ).json( { success:true, event: eventDeleted, message: 'Event deleted successfully' } )
         }catch(err){
             res.status( 500 ).json( { success:false, message: "Internal server error" } )
+        }
+    },
+
+    async deleteEvents(req, res) {
+        try{
+            const deletedEvents = await Event.deleteMany( req.body )
+            res.status(201).json({ success: true, message: "Eventos borrados", events: deletedEvents });
+        }catch(err){
+            console.log( err )
+            res.status(500).json( { success:false, message: "Internal server error" } )
         }
     },
 }

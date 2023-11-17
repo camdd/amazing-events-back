@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const eventSchema = mongoose.Schema({
-    name: String,
+/*     name: String,
     category: String,
     date: String,
     description: String,
@@ -11,12 +11,11 @@ const eventSchema = mongoose.Schema({
     capacity: Number,
     assistance: Number,
     estimate: Number,
-}, { strict: false });
-
+}, { strict: false }); */
 
 
 //para cuando vea más sobre validación:
-    /* name:{
+    name:{
         type: String,
         required: true
     },
@@ -50,21 +49,11 @@ const eventSchema = mongoose.Schema({
     },
     assistance: {
         type: Number,
-        validate: {
-            validator: function (value) {
-                return !(value && this.estimate);
-            },
-        }
     },
     estimate: {
         type: Number,
-        validate: {
-            validator: function (value) {
-                return !(value && this.assistance);
-            },
-        }
     },
-}, { strict: false }) */
+})
 
 const Event = mongoose.model("Event", eventSchema)
 
