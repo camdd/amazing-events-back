@@ -1,20 +1,7 @@
 const mongoose = require('mongoose')
 
 const eventSchema = mongoose.Schema({
-/*     name: String,
-    category: String,
-    date: String,
-    description: String,
-    image: String,
-    place: String,
-    price: Number,
-    capacity: Number,
-    assistance: Number,
-    estimate: Number,
-}, { strict: false }); */
 
-
-//para cuando vea más sobre validación:
     name:{
         type: String,
         required: true
