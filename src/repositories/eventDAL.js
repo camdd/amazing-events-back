@@ -34,14 +34,14 @@ const eventDAL = {
     deleteEvent: async(payload) => {
         try {
             await Event.deleteOne(payload)
-            return "Event updated successfully"
+            return "Event deleted successfully"
         }catch(err) {
             throw new Error (err)
         }
     },
 
-    deleteEvents: async(payload) => {
-        return await Event.deleteMany(payload)
+    deleteEvents: async() => {
+        return await Event.deleteMany({})
     },
 }
 
