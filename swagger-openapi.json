@@ -1,0 +1,426 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Documentación de la API de eventos",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/events": {
+      "get": {
+        "summary": "Obtains a complete list of all events",
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Event"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "couldn't create event"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "creates a new event",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "event created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "couldn't create event"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes all events",
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "events deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "events couldn't be deleted"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/events/{id}": {
+      "get": {
+        "summary": "Obtains a specific event in the list",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "application/json": {
+                  "$ref": "#/definitions/Event"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "event found successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "event couldn't be found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "delete": {
+        "summary": "deletes a specific event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "properties": {
+                "application/json": {
+                  "$ref": "#/definitions/Event"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "event deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "event couldn't be deleted"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "put": {
+        "summary": "updates a specific event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "ID of the event to update"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Event"
+              },
+              "example": {
+                "name": "Interstellar",
+                "category": "Food",
+                "date": "2014-11-22",
+                "description": "Interstellar is about Earth's last chance to find a habitable planet before a lack of resources causes the human race to go extinct.",
+                "image": "https://pics.filmaffinity.com/Interstellar-366875261-large.jpg",
+                "place": "Cinemark unicenter",
+                "price": 10,
+                "capacity": 300,
+                "assistance": 250,
+                "estimate": 260
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Event updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "event modified successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to update event",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "event couldn't be modified"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+    },
+
+    "/api/events/all": {
+      "post": {
+        "summary": "creates many events",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "events": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Event"
+                    }
+                  }
+                },
+                "example": {
+                  "events": [
+                    {
+                      "name": "Collectivities Party",
+                      "category": "Food",
+                      "date": "2021-12-12",
+                      "description": "Enjoy your favourite dishes, from different countries, in a unique event for the whole family.",
+                      "image": "https://i.postimg.cc/kXWrBjXC/collectivities-party.jpg",
+                      "place": "Multi Space",
+                      "price": 10,
+                      "capacity": 50000,
+                      "assistance": 42756
+                    },
+                    {
+                      "name": "Jurassic Park",
+                      "category": "Museum",
+                      "date": "2022-07-05",
+                      "description": "Let's go meet the biggest dinosaurs in the paleontology museum.",
+                      "image": "https://i.postimg.cc/nrQkSwwh/jurassic-park.jpg",
+                      "place": "Field",
+                      "price": 3,
+                      "capacity": 10000,
+                      "assistance": 6589
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "event created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "events not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Event": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Interstellar"
+        },
+        "category": {
+          "type": "string",
+          "example": "Food"
+        },
+        "date": {
+          "type": "string",
+          "example": "2014-11-22"
+        },
+        "description": {
+          "type": "string",
+          "example": "Interstellar is about Earth's last chance to find a habitable planet before a lack of resources causes the human race to go extinct."
+        },
+        "image": {
+          "type": "string",
+          "example": "https://pics.filmaffinity.com/Interstellar-366875261-large.jpg"
+        },
+        "place": {
+          "type": "string",
+          "example": "Cinemark unicenter"
+        },
+        "price": {
+          "type": "number",
+          "example": 10
+        },
+        "capacity": {
+          "type": "number",
+          "example": 300
+        },
+        "assistance": {
+          "type": "number",
+          "example": 250
+        },
+        "estimate": {
+          "type": "number",
+          "example": 260
+        }
+      }
+    }
+  }
+}
