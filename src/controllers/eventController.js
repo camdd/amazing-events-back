@@ -16,7 +16,7 @@ const eventController = {
             const payload = req.params.id
             const eventFound = await eventService.getOneEvent(payload)
             if (eventFound) {
-                res.status( 200 ).json( {event: eventFound} )
+                res.status( 201 ).json( {event: eventFound} )
             } else {
                 res.send("Error getting event")
             }
@@ -66,7 +66,7 @@ const eventController = {
             const eventUpdated = await eventService.updateEvent(id,payload)
             console.log(eventUpdated)
             if (eventUpdated) {
-                res.status( 200 ).json( { event: eventUpdated } )
+                res.status( 201 ).json( { event: eventUpdated } )
             } else {
                 res.send("Error updating event")
             }
@@ -80,13 +80,11 @@ const eventController = {
             const payload = req.body
             const eventDeleted = await eventService.deleteEvent(payload)
             if (eventDeleted) {
-                res.status( 200 ).json( { message: 'Event deleted successfully' } ) 
+                res.status( 201 ).json( { message: 'Event deleted successfully' } ) 
             } else {
                 res.send("Error deleting event")
             }
-            
-            /* const eventDeleted = await Event.deleteOne( { _id: req.params.id }, req.body, { new: true } )
-            */
+
         }catch(err){
             res.status( 500 ).json( { success:false, message: "Internal server error" } )
         }
