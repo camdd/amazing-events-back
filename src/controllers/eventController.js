@@ -64,15 +64,13 @@ const eventController = {
             const payload = req.body
             const id = req.params.id
             const eventUpdated = await eventService.updateEvent(id,payload)
+            console.log(eventUpdated)
             if (eventUpdated) {
                 res.status( 200 ).json( { event: eventUpdated } )
             } else {
                 res.send("Error updating event")
             }
             
-            
-            /* const eventUpdated =  await Event.findOneAndUpdate( { _id: req.params.id }, req.body, { new: true } ) */
-           
         }catch(err) {
         }
     },

@@ -24,7 +24,7 @@ const eventDAL = {
 
     updateEvent: async(id, payload) => {
         try {
-            await Event.findOneAndUpdate(id, payload)
+            await Event.findByIdAndUpdate(id, payload)
             return "Event updated successfully"
         } catch (err) {
             throw new Error(err)

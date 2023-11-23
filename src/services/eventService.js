@@ -30,11 +30,11 @@ const eventService = {
         }  
     },
 
-    updateEvent: async(payload) => {
+    updateEvent: async(id, payload) => {
         if (!payload) {
             throw new Error("Se necesitan datos para editar el evento")
         } 
-        const event = await eventDAL.updateEvent(payload)
+        const event = await eventDAL.updateEvent(id, payload)
         if (event) {
             return event
         }
