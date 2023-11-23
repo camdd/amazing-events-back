@@ -1,18 +1,20 @@
 const express = require('express')
 const eventController = require('../controllers/eventController')
+const { verifyData, verifyId } = require('../middlewares/verifications')
 const eventRouter = express.Router()
+
 
 eventRouter.get( "/", eventController.getEvents ) 
 
-eventRouter.get( "/:id", eventController.getOneEvent )
+eventRouter.get( "/:id", verifyId, eventController.getOneEvent )
 
-eventRouter.post( "/", eventController.createEvent ) 
+eventRouter.post( "/", verifyData, eventController.createEvent ) 
 
 eventRouter.post("/all", eventController.createEvents)
 
-eventRouter.put( "/:id", eventController.updateEvent ) 
+eventRouter.put( "/:id", verifyId, eventController.updateEvent ) 
 
-eventRouter.delete( "/:id", eventController.deleteEvent )
+eventRouter.delete( "/:id", verifyId, eventController.deleteEvent )
 
 eventRouter.delete( "/", eventController.deleteEvents )
 
